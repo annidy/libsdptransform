@@ -1,11 +1,12 @@
 #include "transform.h"
 #include "sdptransform.hpp"
+#include "json.hpp"
 #include <iostream>
 
 char *sdptransform_write(const char *json) {
     try {
-        auto sdp = sdptransform::parse(json);
-        return strdup(sdptransform::write(sdp).c_str());
+        auto session = json::parse(json);
+        return strdup(sdptransform::write(session).c_str());
     } catch (std::exception &e) {
         std::cerr << e.what() << std::endl;
         return nullptr;
